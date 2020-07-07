@@ -22,7 +22,7 @@
 <body>
     <div id="app">
     <!-- #Region Navbar -->
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
                  <span>ProfilManager</span>   
@@ -88,7 +88,7 @@
     <!-- #Endregion Navbar -->
 
      <!-- #Region Content -->
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
      <!-- #Region Content -->

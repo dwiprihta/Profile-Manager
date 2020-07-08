@@ -21,6 +21,16 @@
         <strong>{{ $message }}</strong>
     </span>
     @enderror
+
+    <div class="form-groub">
+        <label for="password-confirm">Password</label>
+        <input type="password" id="password-confirm" name="password-confirm" class="form-control" autocomplete="new-password">
+    </div>
+    @error('password-confirm')
+    <span class="invalid-feedbcak" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+    @enderror
     @endif
 
 

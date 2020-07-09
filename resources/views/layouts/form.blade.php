@@ -76,9 +76,83 @@
 
       <!-- #Endregion Grub TTL -->
 
-     
+      <div class="form-groub py-3">
+          <label for="pekerjaan">Pekerjaan</label>
+          <input type="text" id="pekerjaan" nama="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" value=" {{ old('pekerjaan') ?? $user->pekerjaan ??''}}" autocomplete="pekerjaan">
+          @error ('pekerjaan')
+          <div class="invalid-feedback">
+              <strong> {{ $message }}</strong>
+          </div>
+          @enderror
+      </div>
 
+      <div class="form-groub py-3">
+          <label for="pekerjaan">Kota</label>
+          <input type="text" id="kota" nama="kota" class="form-control @error('kota') is-invalid @enderror" value="{{ old('kota') ?? $user->kota ??''}}" autocomplete="kota" placeholder="kota anda">
+          @error('kota')
+          <div class="invalid-feedback">
+              <strong>{{ $message }}</strong>
+          </div>
+          @enderror
+      </div>
 
+      <div class="form-groub py-3">
+          <label for="bio">bio</label>
+            <textarea id="bio" name="bio" class="form-control" placeholder="bio anda disini">
+                {{ old('bio') ?? $user->bio ?? '' }}
+            </textarea>
+          @error('bio')
+          <div class="invalid-feedback">
+              <strong>{{ $message }}</strong>
+          </div>
+          @enderror
+      </div>
 
+      <div class="form-groub py-3">
+        <label for="foto">Foto</label>
+          <div class="custom-file">
+          <input type="file" id="foto" nama="foto" accept="image/*" class="custom-file-input @error('foto') is-invalid @enderror">
 
+          <label class="custom-file-label col-md-12" for="foto"
+            onchange="$('#foto').val($(this).val());">
+            {{ $user->foto ?? 'Pilih gambar...'}}
+        </label>
+        @error('foto')
+        <div class="invalid-feedback">
+            <strong>{{ $message }}</strong>
+        </div>
+        @enderror
+        </div>
+      </div>
+
+      <div class="form-groub py-3">
+          <label for="bg">Background Profil</label>
+          <select id="bg" name="bg" class="custom-select @error('bg') is-invalid @enderror">
+                @for($i=1; $i<=12; $i++)
+                    @if($i == (old('bg') ?? $user->bg ?? ''))
+                        <option value="{{ $i }}" selected>{{ 'Gambar '.$i }}</option>
+                    @else
+                        <option value="{{ $i }}">{{ 'Gambar '.$i }}</option>
+                    @endif
+                @endfor
+          </select>
+          @error('foto')
+        <div class="invalid-feedback">
+            <strong>{{ $foto }}</strong>
+        </div>
+        @enderror
+        </div>
+
+        <div class="my-2">
+            @for($i=1;$i<=12;$i++)
+                <div class="pilihan-background-profil"> 
+                    <div class="overlay">{{ $i }}</div>
+                    <img class="img-thumbnail" src="{{asset('img/gambar'.$i.'.jpg')}}" width="100px;">
+                </div>
+            @endfor
+        </div><hr>
+
+        <div class="form-groub py-4">
+            <button type="submit" class="btn btn-primary">{{$tombol}}</button>
+        </div>
 </form>

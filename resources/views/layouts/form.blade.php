@@ -14,7 +14,7 @@
         @if ($tombol=="Daftar")
         <div class="form-groub py-3">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') ?? $user->password ?? '' }}" autocomplete="new-password">
+            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" autocomplete="new-password">
         
             @error('password')
             <span class="invalid-feedback" role="alert">
@@ -25,9 +25,9 @@
 
         <div class="form-groub py-3">
             <label for="password-confirm">Password</label>
-            <input type="password" id="password-confirm" name="password-confirm" class="form-control" autocomplete="new-password">
-            @endif
+            <input type="password" id="password-confirm" name="password_confirmation" class="form-control" autocomplete="new-password">
         </div>
+        @endif
      <!-- #Endregion If this form used by register page, show the password form -->
 
      <div class="form-groub py-3">

@@ -104,19 +104,17 @@ class RegisterController extends Controller
             $namaFile="default_profil.jpg";
         }
 
-
         //proses upload file gambar profil
-
         return User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'nama' => $data['nama'],
             'tanggal_lahir'=>$tanggal_lahir,
             'pekerjaan'=>$data['kota'],
-            'kota'=>$data['bio'],
-            'bio'=>$data['bio'],
-            'foto'=>$namaFile,
-            'bg'=>$data['bg'],  
+            'kota'=>$data['kota'],
+            'bio_profil'=>$data['bio'],
+            'gambar_profil'=>$namaFile,
+            'background_profil'=>$data['bg'],  
         ]);
     }
 }

@@ -14,10 +14,10 @@
         @if ($tombol=="Daftar")
         <div class="form-groub py-3">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control @error('passwword') is-invalid @enderror" value="{{ old('password') ?? $user->password ?? '' }}" autocomplete="new-password">
+            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') ?? $user->password ?? '' }}" autocomplete="new-password">
         
             @error('password')
-            <span class="invalid-feedbcak" role="alert">
+            <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
@@ -26,11 +26,6 @@
         <div class="form-groub py-3">
             <label for="password-confirm">Password</label>
             <input type="password" id="password-confirm" name="password-confirm" class="form-control" autocomplete="new-password">
-            @error('password-confirm')
-            <span class="invalid-feedbcak" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
             @endif
         </div>
      <!-- #Endregion If this form used by register page, show the password form -->
@@ -39,11 +34,12 @@
          <label for="nama">Nama</label>
          <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') ?? $user->nama ?? '' }}" autocomplete="nama">
          @error ('nama')
-            <div class="invalid-feedbaclk">
+            <div class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </div>
          @enderror
       </div>
+
 
       <!-- #Region Grub TTL -->
         <div class="form-groub row py-3">
@@ -67,7 +63,7 @@
 
                     <input type="number" name="tahun" id="tahun" class="form-control col-md-3 d-inline @error('tanggal_lahir') is-invalid @enderror" value="{{ old('tahun') ?? $user->tahun ?? '' }}" Placeholder=yyyy>
                     @error ('tanggal_lahir')
-                        <div class="invalid-feedbaclk">
+                        <div class="invalid-feedback">
                             <strong>{{ $message }}</strong>
                         </div>
                     @enderror
@@ -78,19 +74,19 @@
 
       <div class="form-groub py-3">
           <label for="pekerjaan">Pekerjaan</label>
-          <input type="text" id="pekerjaan" nama="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" value=" {{ old('pekerjaan') ?? $user->pekerjaan ??''}}" autocomplete="pekerjaan">
+          <input type="text" id="pekerjaan" name="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" value="{{ old('pekerjaan') ?? $user->pekerjaan ?? '' }}" autocomplete="pekerjaan">
           @error ('pekerjaan')
-          <div class="invalid-feedback">
+          <div class="invalid-feedback" role="alert">
               <strong> {{ $message }}</strong>
           </div>
           @enderror
       </div>
 
       <div class="form-groub py-3">
-          <label for="pekerjaan">Kota</label>
-          <input type="text" id="kota" nama="kota" class="form-control @error('kota') is-invalid @enderror" value="{{ old('kota') ?? $user->kota ??''}}" autocomplete="kota" placeholder="kota anda">
+          <label for="kota">Kota</label>
+          <input type="text" id="kota" name="kota" class="form-control @error('kota') is-invalid @enderror" value="{{ old('kota') ?? $user->kota ?? '' }}" autocomplete="kota" placeholder="kota anda">
           @error('kota')
-          <div class="invalid-feedback">
+          <div class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
           </div>
           @enderror
@@ -102,7 +98,7 @@
                 {{ old('bio') ?? $user->bio ?? '' }}
             </textarea>
           @error('bio')
-          <div class="invalid-feedback">
+          <div class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
           </div>
           @enderror
@@ -112,13 +108,12 @@
         <label for="foto">Foto</label>
           <div class="custom-file">
           <input type="file" id="foto" nama="foto" accept="image/*" class="custom-file-input @error('foto') is-invalid @enderror">
-
           <label class="custom-file-label col-md-12" for="foto"
             onchange="$('#foto').val($(this).val());">
             {{ $user->foto ?? 'Pilih gambar...'}}
         </label>
         @error('foto')
-        <div class="invalid-feedback">
+        <div class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </div>
         @enderror
@@ -137,7 +132,7 @@
                 @endfor
           </select>
           @error('foto')
-        <div class="invalid-feedback">
+        <div class="invalid-feedback" role="alert">
             <strong>{{ $foto }}</strong>
         </div>
         @enderror

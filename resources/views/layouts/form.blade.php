@@ -104,15 +104,31 @@
           @enderror
       </div>
 
-      <div class="form-groub py-3">
-        <label for="foto">Foto</label>
+      <!-- <div class="form-groub py-3">
+        <label for="gambar_profil">gambar_profil</label>
           <div class="custom-file">
-          <input type="file" id="foto" nama="foto" accept="image/*" class="custom-file-input @error('foto') is-invalid @enderror">
-          <label class="custom-file-label col-md-12" for="foto"
-            onchange="$('#foto').val($(this).val());">
-            {{ $user->foto ?? 'Pilih gambar...'}}
+          <input type="file" id="gambar_profil" nama="gambar_profil" accept="image/*" class="custom-file-input @error('gambar_profil') is-invalid @enderror">
+          <label class="custom-file-label col-md-12" for="gambar_profil"
+            onchange="$('#gambar_profil').val($(this).val());">
+            {{ $user->gambar_profil ?? 'Pilih gambar...'}}
         </label>
-        @error('foto')
+        @error('gambar_profil')
+        <div class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </div>
+        @enderror
+        </div>
+      </div> -->
+
+      <div class="form-groub py-3">
+        <label for="gambar_profil">gambar_profil</label>
+          <div class="custom-file">
+          <input type="file" id="gambar_profil" nama="gambar_profil" accept="image/*" class="custom-file-input @error('gambar_profil') is-invalid @enderror">
+          <label class="custom-file-label col-md-12" for="gambar_profil"
+            onchange="$('#gambar_profil').val($(this).val());">
+            {{ $user->gambar_profil ?? 'Pilih gambar...'}}
+        </label>
+        @error('gambar_profil')
         <div class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </div>
@@ -131,9 +147,9 @@
                     @endif
                 @endfor
           </select>
-          @error('foto')
+          @error('gambar_profil')
         <div class="invalid-feedback" role="alert">
-            <strong>{{ $foto }}</strong>
+            <strong>{{ $gambar_profil }}</strong>
         </div>
         @enderror
         </div>

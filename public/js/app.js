@@ -37390,7 +37390,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 */
 $('input[type="file"]').on('change', function () {
   var filenames = [];
-  var files = document.getElementById('foto').files;
+  var files = document.getElementById('gambar_profil').files;
 
   for (var i in files) {
     if (files.hasOwnProperty(i)) {

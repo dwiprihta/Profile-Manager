@@ -5,7 +5,7 @@
 
 $('input[type="file"]').on('change', function () {
     let filenames = [];
-    let files = document.getElementById('foto').files;
+    let files = document.getElementById('gambar_profil').files;
 
     for (let i in files) {
         if (files.hasOwnProperty(i)) {
@@ -24,7 +24,7 @@ $('input[type="file"]').on('change', function () {
 
 $('.pilihan-background-profil').click(function(){
     let nomorGambar = this.children[0].innerHTML;
-    $('#bg').val(nomorGambar);
+    $('#background_profil').val(nomorGambar);
 })
 
 // ================================================================

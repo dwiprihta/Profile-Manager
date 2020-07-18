@@ -66,7 +66,7 @@ class RegisterController extends Controller
             'kota'=>['required','string','max:255'],
             'pekerjaan'=>['required','string','max:255'],
             'bio'=>['sometimes','nullable','string'],
-            'foto'=>['sometimes','file','image','max:3000'],
+            'gambar_profil'=>['sometimes','file','image','max:2000'],
             'bg'=>['required','integer','min:1','max:12'],   
         ]);
     }
@@ -79,29 +79,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //satukan 3 komponen tanggal
-        $tanggal_lahir=$data["tahun"].str_pad($data["bulan"],2,0,STR_PAD_LEFT).str_pad($data["tanggal"],2,0,STR_PAD_LEFT);
+         // Satukan ketiga komponen tanggal
+         $tanggal_lahir = $data["tahun"].str_pad($data["bulan"],2,0,STR_PAD_LEFT).
+         str_pad($data["tanggal"],2,0,STR_PAD_LEFT);
 
-        //ambil request object untuk proses upload file
-        $request=request();
+        // Ambil request object untuk proses upload file
+        $request = request();
 
-        //proses upload gambar profil
-        if($request->hasFile('foto')){
+        // Proses upload file gambar profil
+        if ($request->hasFile('gambar_profil')) {
+        // gunakan slug helper agar "nama" bisa dipakai sebagai bagian
+        // dari nama gambar_profil
+        $slug = Str::slug($data['nama']);
 
-            //gunakan slug helper agar "nama" bisa dipakai sebagai bagian nama foto
-            $slug = Str::slug($data['nama']);
+        // Ambil extensi file asli
+        $extFile = $request->gambar_profil->getClientOriginalExtension();
 
-            //ambil exstensi file asli
-            $extFile=$request->foto->getClientOriginalExtension();
+        // Generate nama gambar, gabungan dari slug "nama"+time()+extensi file
+        $namaFile = $slug.'-'.time().".".$extFile;
 
-            //Generate nama gambar, gabungkan dengan "nama_timr()+ekstensifile
-            $namaFile = $slug.'-'.time().".".$extFile;
-
-            //proses upload simpan kedalam folder upload
-            $request->foto->storeAS('public/uploads', $namaFile);
-        }else{
-            //jika user tidak mengupload gambar isi dengan gambar default
-            $namaFile="default_profil.jpg";
+        // Proses upload, simpan ke dalam folder "uploads"
+        $request->gambar_profil->storeAs('public/uploads',$namaFile);
+        }
+        else {
+        // jika user tidak mengupload gambar, isi dengan gambar default
+        $namaFile = 'default_profile.jpg';
         }
 
         //proses upload file gambar profil

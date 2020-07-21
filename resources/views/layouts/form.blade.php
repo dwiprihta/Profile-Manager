@@ -104,36 +104,21 @@
           @enderror
       </div>
 
-      <!-- <div class="form-groub py-3">
-        <label for="gambar_profil">gambar_profil</label>
-          <div class="custom-file">
-          <input type="file" id="gambar_profil" nama="gambar_profil" accept="image/*" class="custom-file-input @error('gambar_profil') is-invalid @enderror">
-          <label class="custom-file-label col-md-12" for="gambar_profil"
-            onchange="$('#gambar_profil').val($(this).val());">
-            {{ $user->gambar_profil ?? 'Pilih gambar...'}}
-        </label>
-        @error('gambar_profil')
-        <div class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </div>
-        @enderror
-        </div>
-      </div> -->
 
       <div class="form-groub py-3">
-        <label for="gambar_profil">gambar_profil</label>
+        <label for="gambar_profil" class="col-md-3 col-form-label text-md-right">Gambar Profil</label>
           <div class="custom-file">
-          <input type="file" id="gambar_profil" nama="gambar_profil" accept="image/*" class="custom-file-input @error('gambar_profil') is-invalid @enderror">
+          <input type="file" id="gambar_profil" name="gambar_profil" accept="image/*" class="custom-file-input @error('gambar_profil') is-invalid @enderror">
           <label class="custom-file-label col-md-12" for="gambar_profil"
             onchange="$('#gambar_profil').val($(this).val());">
             {{ $user->gambar_profil ?? 'Pilih gambar...'}}
         </label>
         @error('gambar_profil')
-        <div class="invalid-feedback" role="alert">
+        <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
-        </div>
+        </span>
         @enderror
-        </div>
+      </div>
       </div>
 
       <div class="form-groub py-3">

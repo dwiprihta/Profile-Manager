@@ -40,7 +40,7 @@
             <h5 class="card-tittle">{{$user->nama}}</h5>
             <!-- show bio user -->
             <p class="card-text">
-                {{@user->bio_profil}}
+                {{$user->bio_profil}}
             </p>
             <ul class="fa-ul text-left">
                 <li class="mb-2">
@@ -70,14 +70,55 @@
 
                 <li class="mb-2">
                     <span class="fa-li"><i class="far fa-calender"></i></span>
-                    {{ ($user->tanggal_lahir) }}
+                    {{ ($user->email) }}
                 </li>
             </ul>
 
-
+            @can('update',$user)
+                <div class="btn-action">
+                    <a href="{{url('/users/'.$user->id.'/edit')}}" class="btn btn-danger btn-hapus">Edit</a>
+               
+                    <button class="btn btn-danger btn-hapus" data-id="{{$user->id}}" data-toggle="modal" data-target="#DeleteModal">Hapus</button>
+                </div>
+            @endcan
+            
+        </div>
+        @empty
+        <p>Tidak ada data</p>
+        @endforelse
         </div>
     </div>
 <!-- #endregion looping for show all user -->
 
+<!-- #region modal delete confirmation -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+    </button>
 
+    <!-- Modal -->
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="" id="deleteFrom" method="post">
+            @csrf
+            @method('DELETE')
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>apakah anda yakin akan menghapus data ini ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Ya, Hapus</button>
+            </div>
+        </div>
+        </form>
+    </div>      
+</div>
+<!-- #endregion modal delete confirmation -->
 @endsection

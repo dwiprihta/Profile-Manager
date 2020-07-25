@@ -28,14 +28,14 @@
 
 <!-- #region looping for show all user -->
     <div class="card-columns">
-        @forelese ($users as $user)
+        @forelse ($users as $user)
         <div class="card">
             <!-- background profil -->
-            <img class="card-img-top" src="{{ asset('storage/uploads/'.$user->background_profil)}}" alt="gambar profil user">
+            <img class="card-img-top" src="{{ asset('img/uploads/'.$user->background_profil.'.jpg')}}" alt="gambar profil user">
             <!-- profile picture -->
             <div class="card-body">
                 <img src="{{ asset('storage/uploads/'.$user->gambar_profil)}}" alt="fot profil user" class="roundes-circle img-thumbnail">
-            </div>
+            
             <!-- show name user -->
             <h5 class="card-tittle">{{$user->nama}}</h5>
             <!-- show bio user -->
@@ -81,13 +81,13 @@
                     <button class="btn btn-danger btn-hapus" data-id="{{$user->id}}" data-toggle="modal" data-target="#DeleteModal">Hapus</button>
                 </div>
             @endcan
-            
+        </div>
         </div>
         @empty
         <p>Tidak ada data</p>
         @endforelse
-        </div>
     </div>
+   
 <!-- #endregion looping for show all user -->
 
 <!-- #region modal delete confirmation -->

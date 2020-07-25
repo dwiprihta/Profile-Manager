@@ -1,94 +1,100 @@
 @extends('layouts.app')
-
 @section('content')
 
-<!-- #region alert -->
-    @if(session()->has('pesan'))
-        <!-- alert update -->
-        @if(session()->has('pesan')=='update')
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Data <b>{{session()->get('nama')}}</b> berhasil diubah
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        @endif
+<section id="member-list" class="py-5 bg-light text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center" >
+                <h1>Member List</h1>
+                <hr class="w-25"><p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Dignissimos, vitae!</p>
 
-        <!-- alert delete -->
-        @if(session()->has('pesan')=='delete')
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Data <b>{{session()->get('nama')}}</b> berhasil dihapus
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        @endif
-    @endif
-<!-- #endregion alert -->
+                <!-- #region alert -->
+                    @if(session()->has('pesan'))
+                        <!-- alert update -->
+                        @if(session()->has('pesan')=='update')
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Data <b>{{session()->get('nama')}}</b> berhasil diubah
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
 
-<!-- #region looping for show all user -->
-    <div class="card-columns">
-        @forelse ($users as $user)
-        <div class="card">
-            <!-- background profil -->
-            <img class="card-img-top" src="{{ asset('img/uploads/'.$user->background_profil.'.jpg')}}" alt="gambar profil user">
-            <!-- profile picture -->
-            <div class="card-body">
-                <img src="{{ asset('storage/uploads/'.$user->gambar_profil)}}" alt="fot profil user" class="roundes-circle img-thumbnail">
-            
-            <!-- show name user -->
-            <h5 class="card-tittle">{{$user->nama}}</h5>
-            <!-- show bio user -->
-            <p class="card-text">
-                {{$user->bio_profil}}
-            </p>
-            <ul class="fa-ul text-left">
-                <li class="mb-2">
-                    <span class="fa-li"><i class="far fa-lock"></i></span>
-                    Join in{{ date('F Y', strtotime($user->created_at)) }}
-                </li>
+                        <!-- alert delete -->
+                        @if(session()->has('pesan')=='delete')
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Data <b>{{session()->get('nama')}}</b> berhasil dihapus
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                    @endif
+                <!-- #endregion alert -->
 
-                <li class="mb-2">
-                    <span class="fa-li"><i class="far fa-briefcase"></i></span>
-                    {{($user->pekerjaan) }}
-                </li>
+                <!-- #region looping for show all user -->
+                    <div class="card-columns">
+                        @forelse ($users as $user)
+                        <div class="card">
+                            <!-- background profil -->
+                            <img class="card-img-top" src="{{ asset('img/gambar'.$user->background_profil.'.jpg')}}" alt="gambar profil user">
+                            <!-- profile picture -->
+                            <div class="card-body">
+                                <img src="{{ asset('storage/uploads/'.$user->gambar_profil)}}" alt="foto profil user" class="rounded-circle img-thumbnail">
+                            
+                            <!-- show name user -->
+                            <h5 class="card-tittle">{{$user->nama}}</h5>
+                            <!-- show bio user -->
+                            <p class="card-text">
+                                {{$user->bio_profil}}
+                            </p>
+                            <ul class="fa-ul text-left">
+                                <li class="mb-2">
+                                    <span class="fa-li"><i class="fas fa-lock"></i></span>
+                                    Join in{{ date('F Y', strtotime($user->created_at)) }}
+                                </li>
 
-                <li class="mb-2">
-                    <span class="fa-li"><i class="far fa-home"></i></span>
-                    {{ ($user->tempat_lahir) }}
-                </li>
+                                <li class="mb-2">
+                                    <span class="fa-li"><i class="fas fa-briefcase"></i></span>
+                                    {{($user->pekerjaan) }}
+                                </li>
 
-                <li class="mb-2">
-                    <span class="fa-li"><i class="far fa-calender"></i></span>
-                    {{ ($user->tanggal_lahir) }}
-                </li>
+                                <li class="mb-2">
+                                    <span class="fa-li"><i class="fas fa-home"></i></span>
+                                    {{ ($user->kota) }}
+                                </li>
 
-                <li class="mb-2">
-                    <span class="fa-li"><i class="far fa-brithday-cake"></i></span>
-                    {{ date_diff(date_create($user->tanggal_lahir),date_create('now'))->y }} tahun
-                </li>
+                                <!-- <li class="mb-2">
+                                    <span class="fa-li"><i class="fas fa-calender"></i></span>
+                                    {{ ($user->tanggal_lahir) }}
+                                </li> -->
 
-                <li class="mb-2">
-                    <span class="fa-li"><i class="far fa-calender"></i></span>
-                    {{ ($user->email) }}
-                </li>
-            </ul>
+                                <li class="mb-2">
+                                    <span class="fa-li"><i class="fas fa-birthday-cake"></i></span>
+                                    {{ date_diff(date_create($user->tanggal_lahir),date_create('now'))->y }} tahun
+                                </li>
 
-            @can('update',$user)
-                <div class="btn-action">
-                    <a href="{{url('/users/'.$user->id.'/edit')}}" class="btn btn-danger btn-hapus">Edit</a>
-               
-                    <button class="btn btn-danger btn-hapus" data-id="{{$user->id}}" data-toggle="modal" data-target="#DeleteModal">Hapus</button>
-                </div>
-            @endcan
-        </div>
-        </div>
-        @empty
-        <p>Tidak ada data</p>
-        @endforelse
-    </div>
-   
-<!-- #endregion looping for show all user -->
+                                <li class="mb-2">
+                                    <span class="fa-li"><i class="fas fa-envelope"></i></span>
+                                    {{ ($user->email) }}
+                                </li>
+                            </ul>
+
+                            @can('update',$user)
+                                <div class="btn-action">
+                                    <a href="{{url('/users/'.$user->id.'/edit')}}" class="btn btn-danger btn-hapus">Edit</a>
+                            
+                                    <button class="btn btn-danger btn-hapus" data-id="{{$user->id}}" data-toggle="modal" data-target="#DeleteModal">Hapus</button>
+                                </div>
+                            @endcan
+                        </div>
+                        </div>
+                        @empty
+                        <p>Tidak ada data</p>
+                        @endforelse
+                    </div>
+                <!-- #endregion looping for show all user -->
 
 <!-- #region modal delete confirmation -->
     <!-- Button trigger modal -->
@@ -121,4 +127,8 @@
     </div>      
 </div>
 <!-- #endregion modal delete confirmation -->
+</div>
+</div>
+</div>
+</section>
 @endsection

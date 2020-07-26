@@ -1,5 +1,5 @@
 @csrf
-<form>
+
     <div class="form-groub py-3">
         <label for="email">Email</label>
             <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email')?? $user->email ?? '' }}" autocomplete="email" autofocus>
@@ -151,4 +151,3 @@
         <div class="form-groub py-4">
             <button type="submit" class="btn btn-primary">{{$tombol}}</button>
         </div>
-</form>

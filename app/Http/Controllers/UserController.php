@@ -17,4 +17,6 @@ class UserController extends Controller
         return view('user.edit',compact('user'));
     }
 
+    //
+
 }

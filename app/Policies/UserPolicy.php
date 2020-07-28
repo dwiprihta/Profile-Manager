@@ -52,7 +52,11 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        //plicy untuk update data profile
+        return in_array($user->email,[
+            'admin@gmail.com',
+            $model->email,
+        ]);
     }
 
     /**
@@ -64,7 +68,11 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        //policy untuk delete user
+        return in_array($user->email,[
+            'admin@gmail.com',
+            $model->email,
+        ]);
     }
 
     /**

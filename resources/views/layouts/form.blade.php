@@ -1,154 +1,198 @@
 @csrf
-<form>
-    <div class="form-groub py-3">
-        <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email')?? $user->email ?? '' }}" autocomplete="email" autofocus>
-            @error('email')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-    </div>
-    
-    <!-- #Region If this form used by register page, show the password form -->
-        @if ($tombol=="Daftar")
-        <div class="form-groub py-3">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" autocomplete="new-password">
-        
-            @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
+<div class="form-group row">
+  <label for="email" class="col-md-3 col-form-label text-md-right">
+    Email * </label>
+  <div class="col-md-6">
+    <input id="email" type="email"
+    class="form-control @error('email') is-invalid @enderror"
+    name="email" value="{{ old('email') ?? $user->email ?? '' }}"
+    autocomplete="email" autofocus>
+    @error('email')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+</div>
 
-        <div class="form-groub py-3">
-            <label for="password-confirm">Password</label>
-            <input type="password" id="password-confirm" name="password_confirmation" class="form-control" autocomplete="new-password">
-        </div>
+{{-- Jika form ini untuk halaman register, maka tampilkan inputan password --}}
+@if ($tombol == 'Daftar')
+
+<div class="form-group row">
+  <label for="password" class="col-md-3 col-form-label text-md-right">
+  Password *</label>
+  <div class="col-md-6">
+    <input id="password" type="password"
+    class="form-control @error('password') is-invalid @enderror"
+    name="password" autocomplete="new-password">
+    @error('password')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="password-confirm" class="col-md-3 col-form-label text-md-right">
+  Ulangi Password *</label>
+  <div class="col-md-6">
+    <input id="password-confirm" type="password" class="form-control"
+    name="password_confirmation" autocomplete="new-password">
+  </div>
+</div>
+
+@endif
+
+<div class="form-group row">
+  <label for="nama" class="col-md-3 col-form-label text-md-right">
+  Nama *</label>
+  <div class="col-md-6">
+    <input id="nama" type="text" autocomplete="nama"
+    class="form-control @error('nama') is-invalid @enderror"
+    name="nama" value="{{ old('nama') ?? $user->nama ?? '' }}">
+    @error('nama')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="tanggal_lahir" class="col-md-3 col-form-label text-md-right">
+  Tanggal Lahir *</label>
+  <div class="col-md-7">
+    <input type="number" name="tanggal" id="tanggal"
+    class="form-control col-md-3 d-inline
+    @error('tanggal_lahir') is-invalid @enderror"
+    placeholder="dd" value="{{ old('tgl') ?? $user->tgl ?? '' }}">
+    @php
+      // Siapkan nama-nama bulan dalam bahasa Indonesia
+      $namaBulan = ["Januari","Februari","Maret","April",
+                    "Mei","Juni","Juli","Agustus","September",
+                    "Oktober","November","Desember"];
+    @endphp
+    <select class="custom-select col-md-4 d-inline
+    @error('tanggal_lahir') is-invalid @enderror"
+    style="vertical-align: baseline;" name="bulan" id="bulan">
+      @for ($i = 0; $i < 12; $i++)
+        @if ($i+1 == (old('bln') ?? $user->bln ?? ''))
+          <option value="{{ $i+1 }}" selected >{{ $namaBulan[$i] }}</option>
+        @else
+          <option value="{{ $i+1 }}">{{ $namaBulan[$i] }}</option>
         @endif
-     <!-- #Endregion If this form used by register page, show the password form -->
-
-     <div class="form-groub py-3">
-         <label for="nama">Nama</label>
-         <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') ?? $user->nama ?? '' }}" autocomplete="nama">
-         @error ('nama')
-            <div class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </div>
-         @enderror
-      </div>
-
-
-      <!-- #Region Grub TTL -->
-        <div class="form-groub row py-3">
-            <label for="tanggal" class="col-md-3 col-form-label text-md-left">Tanggal Lahir</label>
-            <div class="col-md-12">
-
-                    <input type="number" name="tanggal" id="tanggal" class="form-control col-md-4 d-inline @error('tanggal_lahir') is-invalid @enderror" value="{{ old('tanggal') ?? $user->tanggal ?? '' }}" Placeholder="dd">
-
-                    @php
-                        $namaBulan=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","Sepember","Oktober","November","Desember"];
-                    @endphp
-                    <select name="bulan" id="bulan" class="custom-select col-md-4 d-inline @error('tanggal_lahir') is-invalid @enderror" style="vertical-align: baseline;">
-                        @for ($i=0;$i < 12;$i++)
-                            @if ($i+1 == (old('bulan') ?? $user->bulan ?? ''))
-                                <option value="{{ $i+1 }}" selected>{{ $namaBulan[$i]}}</option>
-                            @else
-                                <option value="{{ $i+1 }}">{{ $namaBulan[$i]}}</option>
-                            @endif
-                        @endfor
-                    </select>
-
-                    <input type="number" name="tahun" id="tahun" class="form-control col-md-3 d-inline @error('tanggal_lahir') is-invalid @enderror" value="{{ old('tahun') ?? $user->tahun ?? '' }}" Placeholder=yyyy>
-                    @error ('tanggal_lahir')
-                        <div class="invalid-feedback">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                    @enderror
-            </div>
-        </div>
-
-      <!-- #Endregion Grub TTL -->
-
-      <div class="form-groub py-3">
-          <label for="pekerjaan">Pekerjaan</label>
-          <input type="text" id="pekerjaan" name="pekerjaan" class="form-control @error('pekerjaan') is-invalid @enderror" value="{{ old('pekerjaan') ?? $user->pekerjaan ?? '' }}" autocomplete="pekerjaan">
-          @error ('pekerjaan')
-          <div class="invalid-feedback" role="alert">
-              <strong> {{ $message }}</strong>
-          </div>
-          @enderror
-      </div>
-
-      <div class="form-groub py-3">
-          <label for="kota">Kota</label>
-          <input type="text" id="kota" name="kota" class="form-control @error('kota') is-invalid @enderror" value="{{ old('kota') ?? $user->kota ?? '' }}" autocomplete="kota" placeholder="kota anda">
-          @error('kota')
-          <div class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-          </div>
-          @enderror
-      </div>
-
-      <div class="form-groub py-3">
-          <label for="bio">bio</label>
-            <textarea id="bio" name="bio" class="form-control" placeholder="bio anda disini">
-                {{ old('bio') ?? $user->bio ?? '' }}
-            </textarea>
-          @error('bio')
-          <div class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
-          </div>
-          @enderror
-      </div>
-
-
-      <div class="form-groub py-3">
-        <label for="gambar_profil" class="col-md-3 col-form-label text-md-right">Gambar Profil</label>
-          <div class="custom-file">
-          <input type="file" id="gambar_profil" name="gambar_profil" accept="image/*" class="custom-file-input @error('gambar_profil') is-invalid @enderror">
-          <label class="custom-file-label col-md-12" for="gambar_profil"
-            onchange="$('#gambar_profil').val($(this).val());">
-            {{ $user->gambar_profil ?? 'Pilih gambar...'}}
-        </label>
-        @error('gambar_profil')
+      @endfor
+    </select>
+    <input type="number" id="tahun" class="form-control col-md-3 d-inline
+    @error('tanggal_lahir') is-invalid @enderror"
+    name="tahun" placeholder="yyyy" value="{{ old('thn') ?? $user->thn ?? ''}}">
+    @error('tanggal_lahir')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-        @enderror
+    @enderror
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="pekerjaan" class="col-md-3 col-form-label text-md-right">
+  Pekerjaan </label>
+  <div class="col-md-6">
+    <input id="pekerjaan" type="text"
+    class="form-control @error('pekerjaan') is-invalid @enderror"
+    name="pekerjaan" value="{{ old('pekerjaan') ?? $user->pekerjaan ?? '' }}">
+    @error('pekerjaan')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="kota" class="col-md-3 col-form-label text-md-right">Kota </label>
+  <div class="col-md-6">
+    <input id="kota" type="text"
+    class="form-control @error('kota') is-invalid @enderror"
+    name="kota" value="{{ old('kota') ?? $user->kota ?? ''}}">
+    @error('kota')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="bio_profil" class="col-md-3 col-form-label text-md-right">
+  Bio Profil</label>
+  <div class="col-md-6">
+    <textarea class="form-control" id="bio_profil" name="bio_profil"
+    placeholder = "Bio singkat anda...">{{
+      old('bio_profil') ?? $user->bio_profil ?? ''
+    }}</textarea>
+    @error('bio_profil')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="gambar_profil" class="col-md-3 col-form-label text-md-right">
+  Gambar Profil</label>
+  <div class="col-md-6">
+    <div class="custom-file">
+    <input type="file" id="gambar_profil" name="gambar_profil" accept="image/*"
+    class="custom-file-input @error('gambar_profil') is-invalid @enderror">
+    <label class="custom-file-label col-md-12" for="gambar_profil"
+    onchange="$('#gambar_profil').val($(this).val());">
+      {{ $user->gambar_profil ?? 'Pilih gambar...'}}
+    </label>
+    @error('gambar_profil')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+    </div>
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="background_profil" class="col-md-3 col-form-label text-md-right">
+  Background Profil</label>
+  <div class="col-md-8">
+    <select name="background_profil" class="custom-select col-md-5
+    @error('background_profil') is-invalid @enderror" id="background_profil" >
+      @for ($i = 1; $i <= 12; $i++)
+        @if($i == (old('background_profil') ?? $user->background_profil ?? ''))
+          <option value="{{ $i }}" selected >{{ 'Gambar '.$i }}</option>
+        @else
+          <option value="{{ $i }}">{{ 'Gambar '.$i }}</option>
+        @endif
+      @endfor
+    </select>
+    @error('background_profil')
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+      </span>
+    @enderror
+    <div class="my-2">
+    @for ($i = 1; $i <= 12; $i++)
+      <div class="pilihan-background-profil">
+        <div class='overlay'>{{ $i }}</div>
+        <img class="img-thumbnail" src="{{asset('img/gambar'.$i.'.jpg')}}"
+        width="100px">
       </div>
-      </div>
+    @endfor
+    </div>
+  </div>
+</div>
 
-      <div class="form-groub py-3">
-          <label for="bg">Background Profil</label>
-          <select id="bg" name="bg" class="custom-select @error('bg') is-invalid @enderror">
-                @for($i=1; $i<=12; $i++)
-                    @if($i == (old('bg') ?? $user->bg ?? ''))
-                        <option value="{{ $i }}" selected>{{ 'Gambar '.$i }}</option>
-                    @else
-                        <option value="{{ $i }}">{{ 'Gambar '.$i }}</option>
-                    @endif
-                @endfor
-          </select>
-          @error('gambar_profil')
-        <div class="invalid-feedback" role="alert">
-            <strong>{{ $gambar_profil }}</strong>
-        </div>
-        @enderror
-        </div>
-
-        <div class="my-2">
-            @for($i=1;$i<=12;$i++)
-                <div class="pilihan-background-profil"> 
-                    <div class="overlay">{{ $i }}</div>
-                    <img class="img-thumbnail" src="{{asset('img/gambar'.$i.'.jpg')}}" width="100px;">
-                </div>
-            @endfor
-        </div><hr>
-
-        <div class="form-groub py-4">
-            <button type="submit" class="btn btn-primary">{{$tombol}}</button>
-        </div>
-</form>
+<div class="form-group row mb-0">
+  <div class="col-md-6 offset-md-3">
+    <button type="submit" class="btn btn-primary">{{$tombol}}</button>
+  </div>
+</div>

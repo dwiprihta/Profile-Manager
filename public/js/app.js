@@ -37407,7 +37407,7 @@ $('input[type="file"]').on('change', function () {
 
 $('.pilihan-background-profil').click(function () {
   var nomorGambar = this.children[0].innerHTML;
-  $('#bg').val(nomorGambar);
+  $('#background_profil').val(nomorGambar);
 }); // ================================================================
 // Kode utuk menampilkan form modal konfirmasi saat tombol delete di klik
 // Dipakai dalam halaman home

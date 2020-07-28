@@ -18,6 +18,6 @@ Auth::routes();
 
 Route::get('/users/{user}/edit','UserController@edit')->middleware('can:update,user');
 Route::patch('/users/{users}','UserController@update')->middleware('can:update,user');
-Route::delete('/users/{user}','UserController@destroy')->middleware('can:update,user');
+Route::delete('/users/{user}','UserController@destroy')->middleware('can:delete,user');
 
 

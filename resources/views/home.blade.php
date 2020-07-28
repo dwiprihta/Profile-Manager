@@ -83,7 +83,7 @@
 
                             @can('update',$user)
                                 <div class="btn-action">
-                                    <a href="{{url('/users/'.$user->id.'/edit')}}" class="btn btn-danger btn-hapus">Edit</a>
+                                    <a href="{{url('/users/'.$user->id.'/edit')}}" class="btn btn-info btn-hapus">Edit</a>
                             
                                     <button class="btn btn-danger btn-hapus" data-id="{{$user->id}}" data-toggle="modal" data-target="#DeleteModal">Hapus</button>
                                 </div>

@@ -52,8 +52,8 @@ class RegisterController extends Controller
     {
 
         //menyatukan komponen tanggal
-        $tanggal_lahir=$data["tahun"].str_pad($data["bulan"],2,0,STR_PAD_LEFT).
-                        str_pad($data["tanggal"],2,0,STR_PAD_LEFT);
+        $tanggal_lahir=$data["thn"].str_pad($data["bln"],2,0,STR_PAD_LEFT).
+                        str_pad($data["tgl"],2,0,STR_PAD_LEFT);
 
         //input penyatuan komponen agar tanggal_lahir bisa divalidaasi
         $data['tanggal_lahir']=$tanggal_lahir;
@@ -80,8 +80,8 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
          // Satukan ketiga komponen tanggal
-         $tanggal_lahir = $data["tahun"].str_pad($data["bulan"],2,0,STR_PAD_LEFT).
-         str_pad($data["tanggal"],2,0,STR_PAD_LEFT);
+         $tanggal_lahir = $data["thn"].str_pad($data["bln"],2,0,STR_PAD_LEFT).
+         str_pad($data["tgl"],2,0,STR_PAD_LEFT);
 
         // Ambil request object untuk proses upload file
         $request = request();

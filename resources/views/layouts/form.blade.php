@@ -63,7 +63,7 @@
   <label for="tanggal_lahir" class="col-md-3 col-form-label text-md-right">
   Tanggal Lahir *</label>
   <div class="col-md-7">
-    <input type="number" name="tanggal" id="tanggal"
+    <input type="number" name="tgl" id="tgl"
     class="form-control col-md-3 d-inline
     @error('tanggal_lahir') is-invalid @enderror"
     placeholder="dd" value="{{ old('tgl') ?? $user->tgl ?? '' }}">
@@ -75,7 +75,7 @@
     @endphp
     <select class="custom-select col-md-4 d-inline
     @error('tanggal_lahir') is-invalid @enderror"
-    style="vertical-align: baseline;" name="bulan" id="bulan">
+    style="vertical-align: baseline;" name="bln" id="bln">
       @for ($i = 0; $i < 12; $i++)
         @if ($i+1 == (old('bln') ?? $user->bln ?? ''))
           <option value="{{ $i+1 }}" selected >{{ $namaBulan[$i] }}</option>
@@ -84,9 +84,9 @@
         @endif
       @endfor
     </select>
-    <input type="number" id="tahun" class="form-control col-md-3 d-inline
+    <input type="number" id="thn" class="form-control col-md-3 d-inline
     @error('tanggal_lahir') is-invalid @enderror"
-    name="tahun" placeholder="yyyy" value="{{ old('thn') ?? $user->thn ?? ''}}">
+    name="thn" placeholder="yyyy" value="{{ old('thn') ?? $user->thn ?? ''}}">
     @error('tanggal_lahir')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>

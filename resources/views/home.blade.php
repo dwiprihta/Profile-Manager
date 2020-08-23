@@ -32,7 +32,7 @@
             Take<strong> Action</strong>
           </h1>
           <br>
-          <p class="bg-info px-2 pb-1 d-inline-block">Lorem ipsum dolor, sit
+          <p class="bg-info px-2 pb-1 d-inline-block">Lor ipsum dolor, sit
             amet consectetur adipisicing elit. Aut cumque molestias asperiores
             ipsam officiis? Doloremque.</p>
         </div>
